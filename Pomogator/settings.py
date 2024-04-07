@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'oauth.apps.OauthConfig',
     "allauth.socialaccount.providers.google",
     "corsheaders",
+    'rest_framework_simplejwt',
 ]
 
 MIDDLEWARE = [
@@ -141,11 +142,12 @@ REST_FRAMEWORK = {
     ],
 
     'DEFAULT_AUTHENTICATION_CLASSES': [
-       'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.BasicAuthentication',
        'rest_framework.authentication.SessionAuthentication',
         'rest_framework_social_oauth2.authentication.SocialAuthentication',
         'oauth.services.auth_backend.AuthBackend',
+
     ],
 
     'DEFAULT_PERMISSION_CLASSES':[
