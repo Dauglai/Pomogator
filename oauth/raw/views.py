@@ -4,8 +4,9 @@ from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.views import View
 
+from .apis import user_list
 from .service import (GoogleRawLoginFlowService, )
-from styleguide_example.users.selectors import user_list
+
 
 
 class GoogleLoginRedirectApi(View):
@@ -24,6 +25,8 @@ class GoogleLoginApi(View):
         code = forms.CharField(required=False)
         error = forms.CharField(required=False)
         state = forms.CharField(required=False)
+
+
 
     def get(self, request, *args, **kwargs):
         input_form = self.InputValidationForm(data=request.GET)

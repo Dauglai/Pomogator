@@ -1,11 +1,20 @@
 from django.contrib.auth import login
+from django.db.models import QuerySet
 from django.shortcuts import redirect
 from rest_framework import serializers, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from .filters import BaseUserFilter
 from .service import (GoogleRawLoginFlowService,)
-from styleguide_example.users.selectors import user_list
+from ..models import AuthUser
+
+
+def user_list(*, filters=None) -> QuerySet[AuthUser]:
+    filters = filters or {}
+    qs = AuthUser.objects.all()
+
+    return BaseUserFilter(filters, qs).qs
 
 
 class PublicApi(APIView):
@@ -29,6 +38,7 @@ class GoogleLoginApi(PublicApi):
         code = serializers.CharField(required=False)
         error = serializers.CharField(required=False)
         state = serializers.CharField(required=False)
+
 
     def get(self, request, *args, **kwargs):
         input_serializer = self.InputSerializer(data=request.GET)
