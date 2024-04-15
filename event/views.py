@@ -4,7 +4,7 @@ from .permissions import IsOwnerOrReadOnly
 from .serializers import EventSerializer, ProjectSerializer
 from .models import Task, Type_Link, Status, Link
 from .serializers import TaskSerializer, Type_LinkSerializer, StatusSerializer, LinkSerializer
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 
 
 class EventAPIList(generics.ListCreateAPIView):
@@ -16,13 +16,13 @@ class EventAPIList(generics.ListCreateAPIView):
 class EventAPIUpdate(generics.RetrieveUpdateAPIView):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+    permission_classes = (IsAuthenticated,)
 
 
 class EventAPIDestroy(generics.RetrieveDestroyAPIView):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+    permission_classes = (IsAuthenticated,)
 
 
 class ProjectAPIList(generics.ListCreateAPIView):
