@@ -42,7 +42,7 @@ async function uploadFile(){
         console.log(error.message)
     }
 }
-
+uploadFile();
 
 async function deleteFile(){
         try {
@@ -76,7 +76,7 @@ async function generatePublicUri(){
     }
 }
 
-//uploadFile();
+
 //deleteFile();
 generatePublicUri();
 
