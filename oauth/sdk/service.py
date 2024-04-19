@@ -45,7 +45,8 @@ class GoogleSdkLoginFlowService:
     SCOPES = [
         "https://www.googleapis.com/auth/userinfo.email",
         "https://www.googleapis.com/auth/userinfo.profile",
-        "openid",
+        "https://www.googleapis.com/auth/drive",
+        "openid"
     ]
 
     def __init__(self):
@@ -58,7 +59,7 @@ class GoogleSdkLoginFlowService:
         return redirect_uri
 
     def _generate_client_config(self):
-        # This follows the structure of the official "client_secret.json" file
+        #"client_secret.json" file
         client_config = {
             self.GOOGLE_CLIENT_TYPE: {
                 "client_id": self._credentials.client_id,
@@ -67,8 +68,8 @@ class GoogleSdkLoginFlowService:
                 "token_uri": self.GOOGLE_ACCESS_TOKEN_OBTAIN_URL,
                 "auth_provider_x509_cert_url": self.GOOGLE_AUTH_PROVIDER_CERT_URL,
                 "client_secret": self._credentials.client_secret,
-                "redirect_uris": [self._get_redirect_uri()],
-                "javascript_origins": [settings.BASE_FRONTEND_URL],
+                "redirect_uri": ["http://localhost:8000/api/v1/login/sdk/callback/","https://developers.google.com/oauthplayground"],
+                "javascript_origins": ["http://localhost:8000", settings.BASE_FRONTEND_URL],
             }
         }
         return client_config
@@ -111,7 +112,6 @@ class GoogleSdkLoginFlowService:
 
     def get_user_info(self, *, google_tokens: GoogleAccessTokens) -> Dict[str, Any]:
         access_token = google_tokens.access_token
-        # Reference: https://developers.google.com/identity/protocols/oauth2/web-server#callinganapi
         response = requests.get(self.GOOGLE_USER_INFO_URL, params={"access_token": access_token})
 
         if not response.ok:

@@ -9,8 +9,7 @@ from django.views import View
 from .service import (
     GoogleSdkLoginFlowService,
 )
-from ..models import AuthUser
-from ..raw.filters import BaseUserFilter
+from .filters import BaseUserFilter
 
 
 def user_list(*, filters=None) -> QuerySet[User]:

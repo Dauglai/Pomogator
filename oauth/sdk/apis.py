@@ -10,7 +10,7 @@ from rest_framework.views import APIView
 from .service import (
     GoogleSdkLoginFlowService,
 )
-from ..raw.filters import BaseUserFilter
+from .filters import BaseUserFilter
 
 
 def user_list(*, filters=None) -> QuerySet[User]:

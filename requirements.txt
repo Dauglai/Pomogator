@@ -28,7 +28,7 @@ uritemplate==4.1.1
 urllib3==2.1.0
 django-allauth==0.54.0
 djangorestframework-simplejwt==5.2.2
-"dj-rest-auth[with_social]==4.0.0"
+
 django-cors-headers==4.1.0
 django-filter~=24.2
 PyJWT~=2.8.0
@@ -39,3 +39,4 @@ flask~=3.0.2
 environ~=1.0
 services~=0.1.1
 config~=0.5.1
+django-oauth2-provider == 0.2.6.1
