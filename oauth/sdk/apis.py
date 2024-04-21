@@ -1,18 +1,21 @@
-from django.contrib.auth import login
+from django.contrib.auth.models import User
 from django.db.models import QuerySet
+from ..models import AuthUser
+from django.contrib.auth import login
 from django.shortcuts import redirect
 from rest_framework import serializers, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from .service import (
+    GoogleSdkLoginFlowService,
+)
 from .filters import BaseUserFilter
-from .service import (GoogleRawLoginFlowService,)
-from ..models import AuthUser
 
 
-def user_list(*, filters=None) -> QuerySet[AuthUser]:
+def user_list(*, filters=None) -> QuerySet[User]:
     filters = filters or {}
-    qs = AuthUser.objects.all()
+    qs = User.objects.all()
 
     return BaseUserFilter(filters, qs).qs
 
@@ -24,7 +27,7 @@ class PublicApi(APIView):
 
 class GoogleLoginRedirectApi(PublicApi):
     def get(self, request, *args, **kwargs):
-        google_login_flow = GoogleRawLoginFlowService()
+        google_login_flow = GoogleSdkLoginFlowService()
 
         authorization_url, state = google_login_flow.get_authorization_url()
 
@@ -38,7 +41,6 @@ class GoogleLoginApi(PublicApi):
         code = serializers.CharField(required=False)
         error = serializers.CharField(required=False)
         state = serializers.CharField(required=False)
-
 
     def get(self, request, *args, **kwargs):
         input_serializer = self.InputSerializer(data=request.GET)
@@ -66,9 +68,9 @@ class GoogleLoginApi(PublicApi):
         if state != session_state:
             return Response({"error": "CSRF check failed."}, status=status.HTTP_400_BAD_REQUEST)
 
-        google_login_flow = GoogleRawLoginFlowService()
+        google_login_flow = GoogleSdkLoginFlowService()
 
-        google_tokens = google_login_flow.get_tokens(code=code)
+        google_tokens = google_login_flow.get_tokens(code=code, state=state)
 
         id_token_decoded = google_tokens.decode_id_token()
         user_info = google_login_flow.get_user_info(google_tokens=google_tokens)

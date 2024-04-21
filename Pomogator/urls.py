@@ -51,8 +51,8 @@ urlpatterns = [
     path('api/v1/link/', LinkAPIList.as_view()),
     path('api/v1/link/<int:pk>/', LinkAPIUpdate.as_view()),
     path('files/', FileCreateAPIView.as_view(), name="file-create"),
-    path('api/v1/', include('oauth.urls')),
     path('api/v1/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/v1/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/v1/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
+    path('api/v1/', include(('oauth.urls', "api"))),
 ]

@@ -1,0 +1,75 @@
+.profile-user-component {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 980px;
+}
+
+.img-info {
+  height: 240px;
+  width: 100%;
+  border-radius: 30px;
+  background-image: url('./profileBG.jpg');
+}
+
+.personal-info {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.personal-info-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.personal-info-container h2 {
+  font-size: 32px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.personal-info-container p {
+  font-size: 24px;
+}
+
+.btn-container-header {
+  font-size: 32px;
+  font-weight: 500;
+  margin-top: 80px;
+}
+
+.btn-container {
+  margin-top: 60px;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  width: 780px;
+  gap: 20px;
+}
+
+.btn-container button {
+  width: 380px;
+  height: 88px;
+  border-radius: 16px;
+  border: 0;
+  background: #EFF0FF;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  gap: 12px;
+  text-align: start;
+  cursor: pointer;
+}
+
+.btn-item-description p:first-child{
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+}
+
+.btn-caption p:last-child{
+  font-size: 20px;
+  color: #49454F;
+}

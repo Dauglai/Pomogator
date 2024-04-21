@@ -1,17 +1,27 @@
 from django import forms
 from django.contrib.auth import login
+from django.contrib.auth.models import User
+from django.db.models import QuerySet
 from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.views import View
 
-from .apis import user_list
-from .service import (GoogleRawLoginFlowService, )
+from .service import (
+    GoogleSdkLoginFlowService,
+)
+from .filters import BaseUserFilter
 
+
+def user_list(*, filters=None) -> QuerySet[User]:
+    filters = filters or {}
+    qs = User.objects.all()
+
+    return BaseUserFilter(filters, qs).qs
 
 
 class GoogleLoginRedirectApi(View):
     def get(self, request, *args, **kwargs):
-        google_login_flow = GoogleRawLoginFlowService()
+        google_login_flow = GoogleSdkLoginFlowService()
 
         authorization_url, state = google_login_flow.get_authorization_url()
 
@@ -25,8 +35,6 @@ class GoogleLoginApi(View):
         code = forms.CharField(required=False)
         error = forms.CharField(required=False)
         state = forms.CharField(required=False)
-
-
 
     def get(self, request, *args, **kwargs):
         input_form = self.InputValidationForm(data=request.GET)
@@ -56,9 +64,9 @@ class GoogleLoginApi(View):
         if state != session_state:
             return JsonResponse({"error": "CSRF check failed."}, status=400)
 
-        google_login_flow = GoogleRawLoginFlowService()
+        google_login_flow = GoogleSdkLoginFlowService()
 
-        google_tokens = google_login_flow.get_tokens(code=code)
+        google_tokens = google_login_flow.get_tokens(code=code, state=state)
 
         id_token_decoded = google_tokens.decode_id_token()
         user_info = google_login_flow.get_user_info(google_tokens=google_tokens)

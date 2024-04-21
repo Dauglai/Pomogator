@@ -182,11 +182,11 @@ CORS_ALLOW_HEADERS = (
     "content-disposition"
 )
 
-GOOGLE_OAUTH2_CLIENT_ID= '503308712884-ho189eou2iq4opobamis0fgfpk7qktim.apps.googleusercontent.com'
-GOOGLE_OAUTH2_CLIENT_SECRET= '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'
-GOOGLE_OAUTH2_PROJECT_ID= 'universal-ion-418212'
-BASE_BACKEND_URL = 'http://localhost:8000/'
-
+GOOGLE_OAUTH2_CLIENT_ID='503308712884-ho189eou2iq4opobamis0fgfpk7qktim.apps.googleusercontent.com'
+GOOGLE_OAUTH2_CLIENT_SECRET='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'
+GOOGLE_OAUTH2_PROJECT_ID='universal-ion-418212'
+BASE_BACKEND_URL = 'http://localhost:8000'
+BASE_FRONTEND_URL = 'http://localhost:3000'
 ALGORITHM = 'HS256'
 ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24
 
