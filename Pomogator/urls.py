@@ -27,7 +27,7 @@ from event.views import (EventAPIList, EventAPIUpdate, EventAPIDestroy, ProjectA
                          ProjectAPIDestroy, LinkAPIList, LinkAPIUpdate, LinkAPIDestroy, TaskAPIList, TaskAPIUpdate,
                          TaskAPIDestroy, StatusViewSet, Type_LinkViewSet)
 from google_docs.views import FileCreateAPIView
-from oauth.endpoint.views import RoleViewSet
+from oauth.views import ProfileAPIList,ProfileAPIUpdate, ProfileAPIDestroy, RoleViewSet
 
 router = routers.SimpleRouter()
 router.register(r'type_link', Type_LinkViewSet)
@@ -38,6 +38,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/drf-auth/', include('rest_framework.urls')),
     path('api/v1/', include(router.urls)),#http://127.0.0.1:8000/api/v1/event/
+    path('accounts/profile/', ProfileAPIList.as_view()),
+    path('api/v1/profile/<int:pk>/', ProfileAPIUpdate.as_view()),
+    path('api/v1/profiledelete/<int:pk>/', ProfileAPIDestroy.as_view()),
     path('api/v1/event/', EventAPIList.as_view()),
     path('api/v1/event/<int:pk>/', EventAPIUpdate.as_view()),
     path('api/v1/eventdelete/<int:pk>/', EventAPIDestroy.as_view()),

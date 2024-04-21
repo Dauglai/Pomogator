@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.db.models import QuerySet
-from ..models import AuthUser
+from ..models import Profile
 from django.contrib.auth import login
 from django.shortcuts import redirect
 from rest_framework import serializers, status
