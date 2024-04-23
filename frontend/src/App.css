@@ -3,5 +3,25 @@
   margin: 0;
   padding: 0;
   text-decoration: none;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Roboto', sans-serif;
+}
+
+:root {
+  /* COLORS */
+  --main-bg: #ffffff;
+  --primary: #314FA3;
+  --secondary: #7D8FCC;
+  --tertiary: #A864E5;
+  --neutral: #C4C3C7;
+  --neutral-variant: #8F909A;
+
+  /* TEXT */
+  --big-text-size: 2em;
+  --big-text-family: 'Montserrat', sans-serif;
+  --big-text-weight: 500;
+  --base-text-size: 1.5em;
+  --base-text-weight: 400;
+  --small-text-size: 1em;
+  --icon-text-size: 0.875em;
+  --help-text-size: 0.75em;
 }

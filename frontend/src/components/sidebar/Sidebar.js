@@ -7,11 +7,9 @@ import { BsFillBrightnessHighFill } from "react-icons/bs";
 import './Sidebar.css'
 
 
-
 const Sidebar = ({children}) => {
     const menuItem=[
         {
-    
             path:"/profile",
             name:"Мой профиль",
             icon:<BsPerson />
