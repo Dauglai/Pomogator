@@ -1,0 +1,3 @@
+const changeProfileCreditsFlag = '';
+
+export {changeProfileCreditsFlag};

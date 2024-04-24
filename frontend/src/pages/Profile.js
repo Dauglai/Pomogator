@@ -1,6 +1,6 @@
 import React from 'react'
 import ProfileUser from '../components/Profile/ProfileUser'
-import ProfileLoggined from '../components/Profile/ProfileLoggined'
+import ProfileLoggined from '../components/Profile/ProfileLoggined.js'
 import './Profile.css'
 
 const Profile = () => {

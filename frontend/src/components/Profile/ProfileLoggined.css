@@ -70,3 +70,54 @@
 .content-container .content-item:last-child {
   border: none;
 }
+
+.profile-change-header {
+  background-color: transparent;
+  border-bottom: 1px solid #C9C6C7;
+  width: 580px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 40px 0px 20px 100px;
+}
+
+.profile-change-heading {
+  font-size: var(--big-text-size);
+  font-family: var(--big-text-family);
+  font-weight: var(--big-text-weight);
+}
+
+.input-container {
+  margin-top: 84px;
+  margin-left: 100px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.input-naming {
+  color: #49454F;
+  font-size: var(--icon-text-size);
+  position: absolute;
+  top: -16px;
+  left: 16px;
+}
+
+.input {
+  width: 580px;
+  height: 56px;
+  border: none;
+  border-bottom: 1px solid #474647;
+  padding-left: 16px;
+  font-size: var(--base-text-size);
+}
+
+.input:focus-visible {
+  outline: none;
+  background: #F4F0EF;
+}
+
+.profile-change-caption {
+  font-size: var(--icon-text-size);
+  color: #49454F;
+}
