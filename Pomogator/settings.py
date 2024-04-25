@@ -148,8 +148,6 @@ REST_FRAMEWORK = {
         'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.BasicAuthentication',
-        'rest_framework_social_oauth2.authentication.SocialAuthentication',
-
     ],
 
     'DEFAULT_PERMISSION_CLASSES':[
@@ -168,7 +166,6 @@ CORS_ALLOW_HEADERS = (
     "x-access-token",
     "content-disposition"
 )
-
 CORS_ORIGIN_ALLOW_ALL = 'ALL'
 CORS_ALLOW_METHODS = (
         'GET',

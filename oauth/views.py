@@ -1,7 +1,7 @@
 from rest_framework import viewsets, generics, permissions
 from .models import Profile, Role
 from .serializers import ProfileSerializer, RoleSerializer
-from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from .permissions import IsOwnerOrReadOnly
 
 

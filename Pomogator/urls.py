@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from oauth import views
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView, TokenVerifyView,
@@ -24,10 +25,11 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from rest_framework import routers
 from event.views import (EventAPIList, EventAPIUpdate, EventAPIDestroy, ProjectAPIUpdate, ProjectAPIList,
-                         ProjectAPIDestroy, LinkAPIList, LinkAPIUpdate, LinkAPIDestroy, TaskAPIList, TaskAPIUpdate,
-                         TaskAPIDestroy, StatusViewSet, Type_LinkViewSet)
+                        ProjectAPIDestroy, LinkAPIList, LinkAPIUpdate, LinkAPIDestroy, TaskAPIList, TaskAPIUpdate,
+                        TaskAPIDestroy, StatusViewSet, Type_LinkViewSet)
 from google_docs.views import FileCreateAPIView
 from oauth.views import ProfileAPIList,ProfileAPIUpdate, ProfileAPIDestroy, RoleViewSet
+
 
 router = routers.SimpleRouter()
 router.register(r'type_link', Type_LinkViewSet)
