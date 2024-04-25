@@ -22,6 +22,7 @@ class ProfileAPIDestroy(generics.RetrieveDestroyAPIView):
     serializer_class = ProfileSerializer
     permission_classes = (IsOwnerOrReadOnly,)
 
+
 class RoleViewSet(viewsets.ModelViewSet):
     queryset = Role.objects.all()
     serializer_class = RoleSerializer
