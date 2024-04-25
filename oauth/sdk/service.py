@@ -59,7 +59,7 @@ class GoogleSdkLoginFlowService:
         return redirect_uri
 
     def _generate_client_config(self):
-        #"client_secret.json" file
+        #"client_secrets.json" file
         client_config = {
             self.GOOGLE_CLIENT_TYPE: {
                 "client_id": self._credentials.client_id,

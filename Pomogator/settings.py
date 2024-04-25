@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
+import logging
 import os
 from pathlib import Path
 from datetime import timedelta
@@ -43,7 +44,6 @@ INSTALLED_APPS = [
     "corsheaders",
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
-    'google_docs.apps.GoogleDocsConfig',
     'oauth.apps.OauthConfig',
     'event.apps.EventConfig',
     'api.apps.ApiConfig',
@@ -148,8 +148,6 @@ REST_FRAMEWORK = {
         'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.BasicAuthentication',
-        'rest_framework_social_oauth2.authentication.SocialAuthentication',
-
     ],
 
     'DEFAULT_PERMISSION_CLASSES':[

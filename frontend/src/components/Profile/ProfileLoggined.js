@@ -9,7 +9,7 @@ export default function ProfileUser() {
     setValue(event.target.value);
   }
   
-  if (changeCreditsFlag == 'nothing') {
+  if (changeCreditsFlag === 'nothing') {
     return (  
     <div className='profile-loggined-component'>
       <div className="banner">
@@ -92,7 +92,7 @@ export default function ProfileUser() {
       </div>
     </div>
     )
-  } else if (changeCreditsFlag ==  'nameChange') {
+  } else if (changeCreditsFlag ===  'nameChange') {
     return (
       <div className='profile-loggined-component'>
         <div onClick={() => changeCredits('nothing')} className='profile-change-header'>
@@ -113,7 +113,7 @@ export default function ProfileUser() {
         </div>
       </div>
     )
-  } else if (changeCreditsFlag ==  'dateChange') {
+  } else if (changeCreditsFlag ===  'dateChange') {
     return (
       <div className='profile-loggined-component'>
         <div onClick={() => changeCredits('nothing')} className='profile-change-header'>
