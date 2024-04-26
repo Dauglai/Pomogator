@@ -5,6 +5,7 @@ from django.db.models import QuerySet
 from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.views import View
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 from .service import (
     GoogleSdkLoginFlowService,

@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
+import logging
 import os
 from pathlib import Path
 from datetime import timedelta
@@ -43,19 +44,15 @@ INSTALLED_APPS = [
     "corsheaders",
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
-    'google_docs.apps.GoogleDocsConfig',
     'oauth.apps.OauthConfig',
     'event.apps.EventConfig',
-    'files.apps.FilesConfig',
     'api.apps.ApiConfig',
-    'allauth',
     'oauth2_provider',
 ]
 
 MIDDLEWARE = [
-    "corsheaders.middleware.CorsMiddleware",
-    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.security.SecurityMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -147,13 +144,10 @@ REST_FRAMEWORK = {
     ],
 
     'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
         'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.BasicAuthentication',
-       'rest_framework.authentication.SessionAuthentication',
-        'rest_framework_social_oauth2.authentication.SocialAuthentication',
-        'oauth.services.auth_backend.AuthBackend',
-
     ],
 
     'DEFAULT_PERMISSION_CLASSES':[
@@ -162,15 +156,6 @@ REST_FRAMEWORK = {
     ]
 }
 
-SWAGGER_SETTINGS = {
-    'SECURITY_DEFINITIONS': {
-        'Bearer': {
-            'type': 'apiKey',
-            'name': 'Authorization',
-            'in': 'header'
-        }
-    }
-}
 from corsheaders.defaults import default_headers
 
 CORS_ALLOW_CREDENTIALS = True
@@ -181,6 +166,15 @@ CORS_ALLOW_HEADERS = (
     "x-access-token",
     "content-disposition"
 )
+CORS_ORIGIN_ALLOW_ALL = 'ALL'
+CORS_ALLOW_METHODS = (
+        'GET',
+        'POST',
+        'PUT',
+        'PATCH',
+        'DELETE',
+        'OPTIONS'
+    )
 
 GOOGLE_OAUTH2_CLIENT_ID='503308712884-ho189eou2iq4opobamis0fgfpk7qktim.apps.googleusercontent.com'
 GOOGLE_OAUTH2_CLIENT_SECRET='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'
@@ -190,23 +184,6 @@ BASE_FRONTEND_URL = 'http://localhost:3000'
 ALGORITHM = 'HS256'
 ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24
 
-SOCIALACCOUNT_PROVIDERS = {
-    "google": {
-        "APP": {
-            "client_id": "<503308712884-ho189eou2iq4opobamis0fgfpk7qktim.apps.googleusercontent.com",
-            "secret": "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",
-            "key": "",
-        },
-        "SCOPE": [
-            "profile",
-            "email",
-        ],
-        "AUTH_PARAMS": {
-            "access_type": "online",
-        },
-        "VERIFIED_EMAIL": True,
-    },
-}
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),

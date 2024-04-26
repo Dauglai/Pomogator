@@ -1,30 +1,45 @@
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+
+import { AuthProvider } from './context/AuthContext'
+
+import HomePage from './pages/HomePage'
+import LoginPage from './pages/LoginPage'
+import Header from './components/Header'
+
+import PrivateRoute from './utils/PrivateRoute'
+
 import React from 'react';
 import Sidebar from './components/sidebar/Sidebar';
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Profile from './pages/Profile';
 import Events from './pages/Events';
 import Team from './pages/Team';
-import Home from './pages/Home';
 import Tasks from './pages/Tasks';
 import './App.css'
 
 
-const App = () => {
+function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<Home/>}/>
-      </Routes>
-      <Sidebar>
-        <Routes>
-          <Route path='/profile' element={<Profile/>} />
-          <Route path='/tasks' element={<Tasks/>} />
-          <Route path='/events' element={<Events/>} />
-          <Route path='/team' element={<Team/>} />
-        </Routes>
-      </Sidebar>
-    </BrowserRouter>
+    <div className="App">
+      <Router>
+        <AuthProvider className="auth__provider">
+          <Header />
+          <Routes>
+            <Route path="/" element={<PrivateRoute><HomePage /></PrivateRoute>} />
+            <Route path="/login" element={<LoginPage />} />
+          </Routes>
+        </AuthProvider>
+        <Sidebar>
+          <Routes>
+            <Route path='/profile' element={<Profile />} />
+            <Route path='/tasks' element={<Tasks />} />
+            <Route path='/events' element={<Events />} />
+            <Route path='/team' element={<Team />} />
+          </Routes>
+        </Sidebar>
+      </Router>
+    </div>
   );
-};
+}
 
 export default App;
+

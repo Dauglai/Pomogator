@@ -1,0 +1,43 @@
+.events-comp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.banner {
+  width: 100%;
+  background-color: #5773C9;
+  height: 120px;
+  border-radius: 30px;
+}
+
+.banner-heading {
+  font-size: var(--big-text-size);
+  font-family: var(--big-text-family);
+  font-weight: var(--big-text-weight);
+  color: var(--main-bg);
+  padding: 40px 0 0 100px;
+}
+
+.events-comp-container {
+  width: 820px;
+}
+
+.btns-create {
+  margin-top: 39px;
+  display: flex;
+  gap: 28px;
+}
+
+.btns-create button {
+  padding: 10px 24px;
+  border: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 30px;
+  background: #718DE5;
+  color: var(--main-bg);
+  font-size: var(--icon-text-size);
+  font-weight: var(--base-text-weight);
+}

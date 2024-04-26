@@ -1,12 +1,8 @@
-from api.views import TextFileViewset
-from django.conf import settings
-from django.urls import include, path
-from rest_framework.routers import DefaultRouter
+# myproject/urls.py или driveapi/urls.py
 
-router = DefaultRouter()
-
-router.register('txt', TextFileViewset, basename='textfiles')
+from django.urls import path
+from api.views import CreateGoogleDocView
 
 urlpatterns = [
-    path(settings.API_VERSION, include(router.urls)),
+    path('create-document/', CreateGoogleDocView.as_view(), name='create-document'),
 ]

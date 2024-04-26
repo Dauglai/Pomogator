@@ -1,11 +1,11 @@
 from rest_framework import serializers
 
-from oauth.models import AuthUser, Role
+from oauth.models import Profile, Role
 
 
-class UserSerializer(serializers.ModelSerializer):
+class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
-        model = AuthUser
+        model = Profile
         fields = '__all__'
 
 
