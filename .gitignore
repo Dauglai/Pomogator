@@ -37,3 +37,6 @@ Pomogator/__pycache__/urls.cpython-311.pyc
 Pomogator/__pycache__/wsgi.cpython-311.pyc
 requirements.txt
 requirements.txt
+frontend/package-lock.json
+frontend/package.json
+.gitignore
