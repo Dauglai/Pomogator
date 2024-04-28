@@ -4,5 +4,5 @@ from .models import GoogleDoc
 
 class TextFileSerializer(serializers.Serializer):
     name = serializers.CharField(max_length=255)
-    data = serializers.CharField()
+    data = serializers.CharField(max_length=10000)
 
