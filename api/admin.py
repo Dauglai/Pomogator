@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import GoogleDoc
+from .models import File
 
 
-admin.site.register(GoogleDoc)
+admin.site.register(File)
