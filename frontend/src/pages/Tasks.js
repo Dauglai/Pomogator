@@ -1,6 +1,6 @@
 import React from 'react';
 import './Tasks.css'
-import '../components/popup/popupTasks.js' 
+import Popup from '../components/popup/popupTasks.js' 
 
 const Tasks = () => {
     return (
@@ -13,7 +13,7 @@ const Tasks = () => {
                 <h4>Задачи, которые нужно назначить самостоятельно, не в рамках мероприятия</h4>
                 <button>Создать задачу</button>
             </div>
-
+            <Popup />
         </div>
     );
 };
