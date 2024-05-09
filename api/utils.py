@@ -41,7 +41,7 @@ def create_google_doc(data, name, id):
     file = service.files().create(body=file_metadata, media_body=media, fields='id').execute()
     doc_id = file.get('id')
     make_document_public(service, doc_id)
-    new_doc = File(document_id=doc_id, name=name, event=Event.objects.get(id=id), type="document")
+    new_doc = File(document_id=doc_id, name=name, event=Event.objects.get(id=id), type="document", data=data)
     new_doc.save()
 
     return doc_id
@@ -61,10 +61,44 @@ def create_google_sheet(data, name, id):
     spreadsheetId = spreadsheet['spreadsheetId']
     servicev3 = build('drive', 'v3', credentials=credentials)
     make_document_public(servicev3, spreadsheetId)
-    new_doc = File(document_id=spreadsheetId, name=name, event=Event.objects.get(id=id), type="sheet")
+    new_doc = File(document_id=spreadsheetId, name=name, event=Event.objects.get(id=id), type="sheet", data=data)
     new_doc.save()
     return spreadsheetId
 
+
+def create_google_pres(data, name, id):
+    #credentials = Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes=SCOPES)
+    credentials = get_credentials()
+    service = build('slides', 'v1', credentials=credentials)
+    body = {"title": name}
+    presentation = service.presentations().create(body=body).execute()
+    slideId = presentation.get('presentationId')
+    servicev3 = build('drive', 'v3', credentials=credentials)
+    make_document_public(servicev3, slideId)
+    new_doc = File(document_id=slideId, name=name, event=Event.objects.get(id=id), type="presentation", data=data)
+    new_doc.save()
+    return slideId
+
+def create_google_forms(data, name, id):
+    #credentials = Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes=SCOPES)
+    credentials = get_credentials()
+    form_service = build(
+        "forms",
+        "v1",
+        credentials=credentials
+    )
+    dict = {
+        "info": {
+            "title": name,
+        },
+    }
+    form = form_service.forms().create(body=dict).execute()
+    formId = form.get("formId")
+    servicev3 = build('drive', 'v3', credentials=credentials)
+    make_document_public(servicev3, formId)
+    new_doc = File(document_id=formId, name=name, event=Event.objects.get(id=id), type="form", data=data)
+    new_doc.save()
+    return formId
 
 def get_credentials():
     creds = None
