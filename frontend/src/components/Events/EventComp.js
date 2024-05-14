@@ -1,7 +1,7 @@
 import React from "react"
 import './EventComp.css'
 
-export default function EventComp() {
+function EventComp() {
   return (
     <div className="events-comp">
       <div className="banner">
@@ -37,3 +37,5 @@ export default function EventComp() {
     </div>
   )
 }
+
+export default EventComp;

@@ -1,0 +1,54 @@
+.container-for-one-tasks{
+    width: 31.25vw;
+    height: 6.87vw;
+    background-color: #EFF0FF;
+    border-radius: 1.25vw;
+    display: flex;
+    position: relative;
+}
+
+.inf-ab-tasks-tasks{
+    padding: 0.9vw 0 0 1.25vw;
+}
+
+.text-data-tasks-tasks{
+    color: #49454F;
+    font-family: 'Roboto' sans-serif;
+    font-size: 0.94vw;
+    font-weight: 400;
+
+}
+
+.text-inf-tasks{
+    color: #1D1B20;
+    font-family: 'Roboto' sans-serif;
+    font-size: 1.25vw;
+    font-weight: 400;
+
+}
+
+.name-event-tasks-tasks{
+    color: #b7b7b7;
+    font-family: 'Roboto' sans-serif;
+    font-size: 1.25vw;
+    font-weight: 400;
+
+}
+
+.check-inf-tasks{
+    position: absolute;
+    top: 0.9vw;
+    right: 1.875vw;
+    width: 3.75vw;
+    height: 3.75vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.checkbox-tasks-tasks{
+   border: 1px solid #49454F; 
+   width: 2vw;
+   height: 1.25vw;
+
+}

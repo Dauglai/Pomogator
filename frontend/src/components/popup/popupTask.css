@@ -96,8 +96,12 @@
 }
 
 .btn-popup {
+    width: 9.3vw;
+    height: 3.125vw;
     margin: 0;
     background: transparent;
     border: 1px solid black;
+    border-radius: 100px;
     color: #5773C9;
+
 }

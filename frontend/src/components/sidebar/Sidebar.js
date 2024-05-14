@@ -1,9 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { BsCalendar3 } from "react-icons/bs";
-import { BsPerson } from "react-icons/bs";
-import { BsPeopleFill } from "react-icons/bs";
-import { BsFillBrightnessHighFill } from "react-icons/bs";
+import { CiPizza } from "react-icons/ci";
+import { CiCalendar } from "react-icons/ci";
+import { CiBoxList } from "react-icons/ci";
+import { CiUser } from "react-icons/ci";
 import './Sidebar.css'
 
 
@@ -12,22 +12,23 @@ const Sidebar = ({children}) => {
         {
             path:"/profile",
             name:"Мой профиль",
-            icon:<BsPerson />
+            icon:<CiUser />
         },
         {
             path:"/tasks",
             name:"Задачи",
-            icon:<BsFillBrightnessHighFill/>
+            icon:<CiBoxList />
         },
         {
             path:"/events",
-            name:"Мероприятия",
-            icon:<BsCalendar3/>
+            name:"Проекты",
+            icon:<CiCalendar />
         },
         {
             path:"/team",
             name:"Команда",
-            icon:<BsPeopleFill/>
+            icon:<CiPizza />
+
         }, 
     ]
     return (

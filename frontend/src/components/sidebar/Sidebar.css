@@ -2,32 +2,33 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 181px;
+    width: 14.1vw;
 
 }
 main{
     width: 100%;
-    padding: 20px;
+    padding: 1.56vw;
 }
 .sidebar{
     background: #FFFFFF;
     color: #fff;
-    height: 1215px;
-    width: 181px;
+    height: 100vh;
+    width: 14.1vw;
     transition: all 0.5s;
-    margin-top: 40px;
+    margin-top: 3.125vw;
 }
 .link{
-    width: 181px;
-    height: 44px;
-    border-radius: 0 60px 60px 0;
+    width: 14.1vw;
+    height: 3.4vw;
+    border-radius: 0 4.6vw 4.6vw 0;
     display: flex;
     color: #000;
-    margin-top: 28px;
-    padding-left: 20px;
-    gap: 15px;
+    margin-top: 2.2vw;
+    padding-left: 1.5vw;
+    gap: 1.17vw;
     transition: all 0.5s;
     align-items: center;
+ 
 }
 .link:hover{
     background: #DBE1FF;
@@ -39,12 +40,12 @@ main{
     color: #000;
 }
 .link_text{
-    font-size: 16px;
+    font-size: 1.25vw;
     font-family: "Roboto", sans-serif;
 
 }
 .icon{
-    font-size: 24px;
+    font-size: 2.5vw;
     color: #414141;
-    
+    margin-top: 0.78vw;
 }

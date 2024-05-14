@@ -1,0 +1,58 @@
+.login-page{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container{
+    max-width: 44vw;
+    max-height: 28vw;
+    background-color: #F4F0EF;  
+    border: 2px solid var(--neutral);
+    border-radius: 16px;
+    padding: 2.9vw 6.25vw 2.9vw 6.25vw;
+    text-align: center;
+}
+
+.login-header{
+    font-family: "Roboto", sans-serif;
+    font-size: 1.875vw;
+    font-weight: 400;
+    color: #214195;
+}
+
+.login-input{
+    margin-top: 2.5vw;
+    width: 31.25vw;
+    height: 4.375vw;
+    background-color: #F4F0EF; 
+    border: 1px solid #474647;
+    border-radius: 4px;
+    padding-left: 1.25vw;
+    font-size: 1.25vw;
+    font-weight: var(--base-text-weight);
+    color: #474647;
+    &:focus-visible {
+        border: 2px solid #214195;
+    }
+}
+
+.login-text{
+    color: #474647;
+    font-size: 0.9vw;
+    font-weight: var(--base-text-weight);
+}
+
+.login-btn{
+    margin-top: 1vw;
+    width: 9.7vw;
+    height: 3.125vw;
+    background-color: var(--neutral);
+    border: 1px solid var(--neutral);
+    border-radius: 50px;
+    color: #474647;
+    font-size: 1.09vw;
+    font-weight: 400;
+}

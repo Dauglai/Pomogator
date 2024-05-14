@@ -1,49 +1,60 @@
 
-.page{
+.head-page-tasks{
     position: absolute;
     top: 0;
-    left: 200px;
+    left: 15.6vw;
 }
+
 .main-title{
-    border-radius: 30px;
+    border-radius: 2.3vw;
     background-color: #5773C9;
-    width: 980px;
-    height: 120px;
-    margin-top: 40px;
-    margin-left: 18px;
+    width: 70.5vw;
+    height: 9.4vw;
+    margin-top: 3.125vw;
+    margin-left: 1.4vw;
     color: #FFFFFF;
     display: flex;
     align-items: center;
+    padding-left: 7.8vw;
 
 }
-h1{
+
+.body-page-tasks{
+    margin-left: 9.2vw; 
+}
+
+.header-tasks{
     font-family: 'Montserrat', sans-serif;
     font-style: normal;
-    font-size: 32px;
-    font-weight: 300;
-    margin-left: 100px;
+    font-size: 2.5vw;
+    font-weight: 400;
+
 }
+
 .box-process{
-    margin-top: 40px;
-    margin-left: 18px;
+    margin-top: 3.125vw;
+    width: 70.3vw;
 }
-h4{
-    margin-left: 100px;
-    font-family: 'Montserrat-1', sans-serif;
-    font-style: 100;
+
+.subtitle-tasks{
+    font-family: 'Roboto', sans-serif;
+    font-size: 1vw;
+    font-weight: 400;
     color: #474647;
 }
 
-button{
+.new-tasks-btn{
+    margin-top: 1.56vw;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 13.4vw;
+    height: 2.8vw;
     background-color: #718DE5;
-    color: black;
-    border-color: #718DE5;
-    width: 172px;
-    height: 36px;
-    border-radius: 30px;
-    margin-top: 20px;
-    margin-left: 347px;
-    font-family: 'Montserrat-1', sans-serif;
-    font-size: medium;
-
+    color: white;
+    border: 0.001vw #718DE5;
+    border-radius: 2.3vw;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.1vw;
+    font-weight: 350;
 }
