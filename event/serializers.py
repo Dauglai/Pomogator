@@ -1,7 +1,8 @@
 from rest_framework import serializers
+from api.serializers import FileSerializer
 from .models import Event, Project
 from rest_framework import serializers
-from .models import Task, Link, Status, Type_Link
+from .models import Task, Status
 
 
 class TaskSerializer(serializers.ModelSerializer):
@@ -11,16 +12,10 @@ class TaskSerializer(serializers.ModelSerializer):
 
 
 
-class LinkSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Link
-        fields = '__all__'
-
-
 class EventSerializer(serializers.ModelSerializer):
     owner = serializers.HiddenField(default=serializers.CurrentUserDefault())
-    tasks = TaskSerializer(source="task_set", many=True, read_only=True)
-    links = LinkSerializer(source="link_set", many=True, read_only=True)
+    tasks = TaskSerializer(source="task_set", many=True, read_only=False)
+    files = FileSerializer(source="file_set", many=True, read_only=False)
     class Meta:
         model = Event
         fields = '__all__'
@@ -39,10 +34,4 @@ class StatusSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Status
-        fields = '__all__'
-
-
-class Type_LinkSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Type_Link
         fields = '__all__'

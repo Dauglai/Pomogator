@@ -25,16 +25,13 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from rest_framework import routers
 
-from api.views import CreateGoogleDocView
+from api.views import GoogleFilesView, GoogleFilesDetail
 from event.views import (EventAPIList, EventAPIUpdate, EventAPIDestroy, ProjectAPIUpdate, ProjectAPIList,
-                         ProjectAPIDestroy, LinkAPIList, LinkAPIUpdate, LinkAPIDestroy, TaskAPIList, TaskAPIUpdate,
-                         TaskAPIDestroy, StatusViewSet, Type_LinkViewSet)
+                         ProjectAPIDestroy, TaskAPIList, TaskAPIUpdate, TaskAPIDestroy)
 from oauth.views import ProfileAPIList,ProfileAPIUpdate, ProfileAPIDestroy, RoleViewSet
 
 
 router = routers.SimpleRouter()
-router.register(r'type_link', Type_LinkViewSet)
-router.register(r'status', StatusViewSet)
 router.register(r'role', RoleViewSet)
 
 urlpatterns = [
@@ -53,12 +50,10 @@ urlpatterns = [
     path('api/v1/taskdelete/<int:pk>/', TaskAPIDestroy.as_view()),
     path('api/v1/task/', TaskAPIList.as_view()),
     path('api/v1/task/<int:pk>/', TaskAPIUpdate.as_view()),
-    path('api/v1/linkdelete/<int:pk>/', LinkAPIDestroy.as_view()),
-    path('api/v1/link/', LinkAPIList.as_view()),
-    path('api/v1/link/<int:pk>/', LinkAPIUpdate.as_view()),
     path('api/v1/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/v1/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/v1/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
     path('api/v1/', include(('oauth.urls', "api"))),
-    path('create-document/', CreateGoogleDocView.as_view(), name='create-document'),
+    path('create-document/', GoogleFilesView.as_view(), name='create-document'),
+    path('create-document/<int:pk>/', GoogleFilesDetail.as_view(), name='delete-document')
 ]

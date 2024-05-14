@@ -18,20 +18,41 @@ SCOPES = [
     "https://www.googleapis.com/auth/drive.metadata.readonly",
     "openid"
 ]
-SERVICE_ACCOUNT_FILE = 'credentials.json'
+
 file_types = {
-    "document": "application/vnd.google-apps.document",
-    "presentation": "application/vnd.google-apps.presentation",
-    "sheet": "application/vnd.google-apps.spreadsheet",
+    "document": "https://docs.google.com/document/d/",
+    "presentation": "https://docs.google.com/presentation/d/",
+    "sheet": "https://docs.google.com/spreadsheets/d/",
     "folder": "application/vnd.google-apps.folder",
-    "photo": "application/vnd.google-apps.photo"
+    "photo": "application/vnd.google-apps.photo",
+    "forms": "https://docs.google.com/forms/d/"
 }
 
-def create_google_doc(data, name, id):
+SERVICE_ACCOUNT_FILE = 'credentials.json'
+
+def create_google_file(name, data, type, id):
     #credentials = Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes=SCOPES)
     credentials = get_credentials()
     service = build('drive', 'v3', credentials=credentials)
+    fileId = ""
+    if type == "document":
+        fileId = create_google_doc(credentials, data, name)
+    if type == "sheet":
+        fileId = create_google_sheet(credentials, data, name)
+    if type == "presentation":
+        fileId = create_google_pres(credentials, data, name)
+    if type == "forms":
+        fileId = create_google_forms(credentials, data, name)
+    if fileId == "":
+        return fileId
+    make_document_public(service, fileId)
+    new_doc = File(file_id=fileId, name=name, event=Event.objects.get(id=id), type=type, data=data, url=f'{file_types[type]}{fileId}')
+    new_doc.save()
+    return fileId
 
+
+def create_google_doc(credentials, data, name):
+    service = build('drive', 'v3', credentials=credentials)
     file_metadata = {
         'name': name,
         'mimeType': 'application/vnd.google-apps.document'
@@ -39,18 +60,10 @@ def create_google_doc(data, name, id):
     fh = BytesIO(data.encode())
     media = MediaIoBaseUpload(fh, mimetype='text/plain')
     file = service.files().create(body=file_metadata, media_body=media, fields='id').execute()
-    doc_id = file.get('id')
-    make_document_public(service, doc_id)
-    new_doc = File(document_id=doc_id, name=name, event=Event.objects.get(id=id), type="document", data=data)
-    new_doc.save()
+    return file.get('id')
 
-    return doc_id
-
-def create_google_sheet(data, name, id):
-    #credentials = Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes=SCOPES)
-    credentials = get_credentials()
+def create_google_sheet(credentials, data, name):
     service = build('sheets', 'v4', credentials=credentials)
-
     spreadsheet = service.spreadsheets().create(body={
         'properties': {'title': f'{name}', 'locale': 'ru_RU'},
         'sheets': [{'properties': {'sheetType': 'GRID',
@@ -58,47 +71,24 @@ def create_google_sheet(data, name, id):
                                    'title': f'{data}',
                                    'gridProperties': {'rowCount': 100, 'columnCount': 15}}}]
     }).execute()
-    spreadsheetId = spreadsheet['spreadsheetId']
-    servicev3 = build('drive', 'v3', credentials=credentials)
-    make_document_public(servicev3, spreadsheetId)
-    new_doc = File(document_id=spreadsheetId, name=name, event=Event.objects.get(id=id), type="sheet", data=data)
-    new_doc.save()
-    return spreadsheetId
+    return spreadsheet['spreadsheetId']
 
 
-def create_google_pres(data, name, id):
-    #credentials = Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes=SCOPES)
-    credentials = get_credentials()
+def create_google_pres(credentials, data, name):
     service = build('slides', 'v1', credentials=credentials)
     body = {"title": name}
     presentation = service.presentations().create(body=body).execute()
-    slideId = presentation.get('presentationId')
-    servicev3 = build('drive', 'v3', credentials=credentials)
-    make_document_public(servicev3, slideId)
-    new_doc = File(document_id=slideId, name=name, event=Event.objects.get(id=id), type="presentation", data=data)
-    new_doc.save()
-    return slideId
+    return presentation.get('presentationId')
 
-def create_google_forms(data, name, id):
-    #credentials = Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes=SCOPES)
-    credentials = get_credentials()
-    form_service = build(
-        "forms",
-        "v1",
-        credentials=credentials
-    )
+def create_google_forms(credentials, data, name):
+    form_service = build("forms","v1", credentials=credentials)
     dict = {
         "info": {
             "title": name,
         },
     }
     form = form_service.forms().create(body=dict).execute()
-    formId = form.get("formId")
-    servicev3 = build('drive', 'v3', credentials=credentials)
-    make_document_public(servicev3, formId)
-    new_doc = File(document_id=formId, name=name, event=Event.objects.get(id=id), type="form", data=data)
-    new_doc.save()
-    return formId
+    return form.get("formId")
 
 def get_credentials():
     creds = None

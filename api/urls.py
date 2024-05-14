@@ -1,8 +1,6 @@
-# myproject/urls.py или driveapi/urls.py
-
 from django.urls import path
-from api.views import CreateGoogleDocView
+from api.views import GoogleFilesView
 
 urlpatterns = [
-    path('create-document/', CreateGoogleDocView.as_view(), name='create-document'),
+    path('create-document/', GoogleFilesView.as_view(), name='create-document'),
 ]
