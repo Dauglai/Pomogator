@@ -23,11 +23,20 @@ const [popupOpen, setPopupOpen] = useState(false);
                     <h1 className='header-tasks'>Мероприятия</h1>
                     <h4 className='subtitle-tasks'>Задачи, которые назначаются в рамках работы над мероприятием</h4>
                 </div>
+                <div className='tasks-container'>
+                    <BoxTasks/>
+                    <BoxTasks/>
+                    <BoxTasks/>
+                </div>
                 <div className='box-process'>
                     <h1 className='header-tasks'>Архив</h1>
                     <h4 className='subtitle-tasks'>Выполненные задачи</h4>
                 </div>
-                <BoxTasks/>
+                <div className='tasks-container'>
+                    <BoxTasks/>
+                    <BoxTasks/>
+                    <BoxTasks/>
+                </div>
             </div>
             <Popup 
             isOpen={popupOpen}

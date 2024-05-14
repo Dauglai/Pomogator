@@ -1,44 +1,45 @@
-
-.head-page-tasks{
-    position: absolute;
-    top: 0;
-    left: 15.6vw;
+.head-page-tasks {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }
 
 .main-title{
     border-radius: 2.3vw;
     background-color: #5773C9;
-    width: 70.5vw;
-    height: 9.4vw;
-    margin-top: 3.125vw;
-    margin-left: 1.4vw;
+    width: 880px;
+    height: 120px;
+    margin-top: 40px;
     color: #FFFFFF;
     display: flex;
     align-items: center;
-    padding-left: 7.8vw;
-
+    padding-left: 100px;
 }
 
 .body-page-tasks{
-    margin-left: 9.2vw; 
+    width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-top: 60px;
 }
 
 .header-tasks{
     font-family: 'Montserrat', sans-serif;
     font-style: normal;
-    font-size: 2.5vw;
+    font-size: 2em;
     font-weight: 400;
-
 }
 
 .box-process{
-    margin-top: 3.125vw;
-    width: 70.3vw;
+    width: 100%;
 }
 
 .subtitle-tasks{
     font-family: 'Roboto', sans-serif;
-    font-size: 1vw;
+    font-size: 12px;
     font-weight: 400;
     color: #474647;
 }
@@ -57,4 +58,13 @@
     font-family: 'Roboto', sans-serif;
     font-size: 1.1vw;
     font-weight: 350;
+}
+
+.tasks-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 100px;
+    row-gap: 20px ;
 }
