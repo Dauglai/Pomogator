@@ -41,13 +41,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    "corsheaders",
+    'drf_yasg',
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
     'oauth.apps.OauthConfig',
     'event.apps.EventConfig',
     'api.apps.ApiConfig',
     'oauth2_provider',
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
