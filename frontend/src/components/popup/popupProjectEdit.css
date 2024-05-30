@@ -1,12 +1,5 @@
-.box-popup{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 16px;
-}
 
-.popup-shadow {
+.popup-project-edit-shadow {
     position: fixed;
     top:      0;
     right:     0;
@@ -16,7 +9,7 @@
     background-color: rgba(0, 0, 0, 0.4);
 }
 
-.popup-container {
+.popup-project-edit-container {
     z-index:   20;
     position:  fixed;
     top:       50%;
@@ -28,12 +21,6 @@
     flex-direction: column;
     justify-content: center;
     border-radius: 16px;
-}
-
-.heading {
-    color: #474647;
-    font-size: var(--base-text-size);
-    font-weight: var(--base-text-weight);
 }
 
 .heading-description {
@@ -92,7 +79,8 @@
 
 .popup-btn-container {
     display: flex;
-    gap: 20px
+    gap: 20px;
+    text-align: center;
 }
 
 .btn-popup {

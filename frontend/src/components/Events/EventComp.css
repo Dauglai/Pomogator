@@ -41,3 +41,33 @@
   font-size: var(--icon-text-size);
   font-weight: var(--base-text-weight);
 }
+
+.header-proj{
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-size: 2em;
+  font-weight: 400;
+}
+
+.projs-container{
+  margin-top: 60px;
+  padding-bottom: 80px;
+}
+
+.events-container{
+  padding-bottom: 80px;
+}
+
+.archive-container{
+  padding-bottom: 80px;
+}
+
+.box-w-proj{
+  padding: 34px 0 0 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 24px;
+  row-gap: 30px ;
+}
