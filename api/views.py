@@ -8,6 +8,8 @@ from .models import File
 from .utils import create_google_file, get_credentials
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
 
 file_types = {
     "document": "https://docs.google.com/document/d/",
@@ -24,6 +26,7 @@ class GoogleFilesView(APIView):
         txt = File.objects.all()
         return Response(FileSerializer(txt, many=True).data)
 
+    @swagger_auto_schema(request_body=CreateFileSerializer)
     def post(self, request):
         serializer = CreateFileSerializer(data=request.data)
         if serializer.is_valid():
@@ -31,13 +34,10 @@ class GoogleFilesView(APIView):
             data = serializer.validated_data['data']
             id = serializer.validated_data['event_id']
             type = serializer.validated_data['type']
-            try:
-                if type == "":
-                    return Response({"error": f"Указан неправильный тип документа"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-                fileId = create_google_file(name, data, type, id)
-                return Response({'message': 'Документ успешно создан.', 'link': f'{file_types[type]}{fileId}'}, status=status.HTTP_201_CREATED)
-            except Exception as e:
-                return Response({"error": f"{e}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            if type == "":
+                return Response({"error": f"Указан неправильный тип документа"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            fileId = create_google_file(name, data, type, id)
+            return Response({'message': 'Документ успешно создан.', 'link': f'{file_types[type]}{fileId}'}, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

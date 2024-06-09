@@ -14,6 +14,7 @@ class FileSerializer(serializers.Serializer):
     type = serializers.CharField(max_length=255)
     data = serializers.CharField()
     file_id = serializers.CharField(max_length=255)
+    folder_id = serializers.CharField(max_length=255)
     created_at = serializers.DateTimeField()
     url = serializers.URLField()
     event_id = serializers.IntegerField()

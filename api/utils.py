@@ -33,6 +33,7 @@ SERVICE_ACCOUNT_FILE = 'credentials.json'
 def create_google_file(name, data, type, id):
     #credentials = Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes=SCOPES)
     credentials = get_credentials()
+    event = Event.objects.get(id=id)
     service = build('drive', 'v3', credentials=credentials)
     fileId = ""
     if type == "document":
@@ -45,17 +46,18 @@ def create_google_file(name, data, type, id):
         fileId = create_google_forms(credentials, data, name)
     if fileId == "":
         return fileId
-    make_document_public(service, fileId)
-    new_doc = File(file_id=fileId, name=name, event=Event.objects.get(id=id), type=type, data=data, url=f'{file_types[type]}{fileId}')
+    folder_id = make_document_public(service, fileId, event)
+    new_doc = File(file_id=fileId, name=name, event=event, type=type, data=data, url=f'{file_types[type]}{fileId}', folder_id=folder_id)
     new_doc.save()
     return fileId
 
 
 def create_google_doc(credentials, data, name):
     service = build('drive', 'v3', credentials=credentials)
+
     file_metadata = {
         'name': name,
-        'mimeType': 'application/vnd.google-apps.document'
+        'mimeType': 'application/vnd.google-apps.document',
     }
     fh = BytesIO(data.encode())
     media = MediaIoBaseUpload(fh, mimetype='text/plain')
@@ -106,13 +108,37 @@ def get_credentials():
     return creds
 
 
-def make_document_public(service, file_id):
+def make_document_public(service, file_id, event):
     public_permission = {
         'type': 'anyone',
         'role': 'writer',
     }
+    folder_id = get_folder_id(service, event)
+    service.files().update(
+            fileId=file_id,
+            addParents=folder_id,
+            removeParents="",
+            fields="id, parents",
+        ).execute()
     service.permissions().create(
         fileId=file_id,
         body=public_permission,
         fields='id',
     ).execute()
+    return folder_id
+
+
+def get_folder_id(service, event):
+    service.files().list(
+            q="mimeType='application/vnd.google-apps.folder'",
+            spaces="drive",
+            fields="nextPageToken, files(id, name)",
+        ).execute()
+    if event.file_set.count() == 0:
+        metadata = {
+            "name": event.title,
+            "mimeType": "application/vnd.google-apps.folder",
+        }
+        folder = service.files().create(body=metadata, fields="id").execute()
+        return folder.get("id")
+    return File.objects.filter(event_id=event.id)[0].folder_id
