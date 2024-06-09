@@ -1,0 +1,24 @@
+.container-for-one-project{
+    width: 200px;
+    max-height: 80px;
+    background-color: #EFF0FF;
+    text-align: center;
+    padding: 11px 0 11px 0;
+    border: 1px solid #3C59AE;
+    border-radius: 30px;
+}
+
+.data-dedl-project{
+    padding-top: 20px;
+    font-family: 'Roboto' sans-serif;
+    font-size: 16px;
+    font-weight: 450;
+    
+}
+
+.name-project{
+    font-family: 'Roboto' sans-serif;
+    font-size: 16px;
+    font-weight: 450;
+
+}
